@@ -2,7 +2,8 @@
   "extras": [
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.nix",
-    "lazyvim.plugins.extras.lang.yaml"
+    "lazyvim.plugins.extras.lang.yaml",
+    "lazyvim.plugins.extras.ui.mini-indentscope"
   ],
   "install_version": 8,
   "news": {
