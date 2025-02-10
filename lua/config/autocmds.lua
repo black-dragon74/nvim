@@ -8,14 +8,19 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- If file's base directory is different, CD to it.
+-- Prefer git root if available
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local file_dir = vim.fn.expand("%:p:h")
+    local git_root = vim.fn.systemlist("git -C " .. vim.fn.shellescape(file_dir) .. " rev-parse --show-toplevel")[1]
     local pwd = vim.fn.getcwd()
 
-    if file_dir ~= pwd and vim.fn.isdirectory(file_dir) == 1 then
-      vim.cmd("lcd" .. file_dir)
-      vim.api.nvim_notify("Changed cwd to " .. file_dir, vim.log.levels.INFO, { title = "Auto CD" })
+    local new_cwd = vim.fn.isdirectory(git_root) == 1 and git_root
+      or (vim.fn.isdirectory(file_dir) == 1 and file_dir or nil)
+
+    if new_cwd and pwd ~= new_cwd then
+      vim.cmd("lcd" .. new_cwd)
+      vim.api.nvim_notify("Changed cwd to " .. new_cwd, vim.log.levels.INFO, { title = "Auto CD" })
     end
   end,
 })
