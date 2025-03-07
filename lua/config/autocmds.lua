@@ -24,3 +24,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+-- Inside nvim we don't want the cursor to blink while editing
+-- However, this breaks blinking cursor for the outside terminal
+-- This autocmd forces the cursor to blinking state when exiting
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    vim.cmd("set guicursor=a:blinkon100")
+  end,
+})
