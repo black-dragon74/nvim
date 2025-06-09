@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
     if new_cwd and pwd ~= new_cwd then
       vim.cmd("lcd" .. new_cwd)
-      vim.api.nvim_notify("Changed cwd to " .. new_cwd, vim.log.levels.INFO, { title = "Auto CD" })
+      vim.api.nvim_echo({ { "Changed cwd to " .. new_cwd, "MoreMsg" } }, false, {})
     end
   end,
 })
