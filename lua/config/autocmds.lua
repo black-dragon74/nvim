@@ -24,3 +24,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+-- Disable spell check
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
