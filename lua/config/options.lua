@@ -7,3 +7,6 @@ vim.opt.clipboard = ""
 
 -- Disable spell check, hate the squiggly lines
 vim.o.spell = false
+
+-- Add scroll padding
+vim.opt.scrolloff = 5
